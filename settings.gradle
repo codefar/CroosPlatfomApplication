@@ -1,0 +1,1 @@
+include ':app', ':platform', ':platform_pc', ':platform_android', ':domain'

@@ -63,3 +63,9 @@ fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 fastlane/readme.md
+.gradle
+/local.properties
+/.idea/
+/build/
+/platform_android/build/
+/platform_pc/build/

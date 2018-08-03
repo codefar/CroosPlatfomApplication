@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+option java_package = "com.example.tutorial";
+option java_outer_classname = "OuterSample";
+option java_multiple_files = true;
+
+message Msg {
+    string foo = 1;
+    SecondMsg blah = 2;
+}
+
+enum EnumAllowingAlias {
+    option allow_alias = true;
+    UNKNOWN = 0;
+    STARTED = 1;
+    RUNNING = 1;
+}
+
+message Person {
+    int32 age = 1;
+    repeated string names = 2;
+    reserved "foo", "bar"; // 预留将来使用的filed name
+}
+
+message Family {
+    repeated Person person = 1;
+    map<string, Person> key2P = 2;
+}
+
+message SecondMsg {
+    int32 blah = 1;
+    repeated string names = 2;
+}

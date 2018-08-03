@@ -1,0 +1,60 @@
+apply plugin: 'java-library'
+apply plugin: 'com.google.protobuf'
+apply plugin: 'application'
+mainClassName="org.greenleaf.lib.Service"
+
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.6'
+    }
+}
+
+sourceSets {
+    main {
+        proto {
+            // In addition to the default 'src/main/proto'
+            srcDir 'src/main/protobuf'
+            srcDir 'src/main/protocolbuffers'
+            // In addition to the default '**/*.proto' (use with caution).
+            // Using an extension other than 'proto' is NOT recommended,
+            // because when proto files are published along with class files, we can
+            // only tell the type of a file from its extension.
+            include '**/*.protodevel'
+        }
+
+        java {
+            srcDir 'src/main/java-gen'
+        }
+    }
+
+    test {
+        proto {
+            // In addition to the default 'src/test/proto'
+            srcDir 'src/test/protocolbuffers'
+        }
+    }
+}
+
+protobuf {
+
+    generatedFilesBaseDir = "$projectDir/src/"
+
+    protoc {
+        // Download from repositories
+        artifact = 'com.google.protobuf:protoc:3.0.0'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'org.apache.thrift:libthrift:0.11.0'
+    implementation 'com.google.protobuf:protobuf-java:3.4.0'
+    implementation 'com.googlecode.protobuf-java-format:protobuf-java-format:1.2'
+}
+
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"
